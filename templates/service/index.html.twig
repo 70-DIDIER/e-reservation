@@ -1,11 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategorieController!{% endblock %}
+{% block title %}Liste des services{% endblock %}
 
 {% block body %}
 <div class="container-xxl py-5">
     <div class="container">
-        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Les services disponibles</h1>
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
+            {% if is_granted('ROLE_PRESTATAIRE') %}
+                Mes services créés
+            {% else %}
+                Les services disponibles
+            {% endif %}
+        </h1>
+        
+        {% if is_granted('ROLE_PRESTATAIRE') %}
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <a href="{{ path('app_service_create') }}" class="btn btn-primary">
+                        Créer un nouveau service
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+        
         <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
@@ -27,17 +44,21 @@
                                     </span>
                                 </div>
                             </div>
+                            
                             <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                 <div class="d-flex mb-3">
                                     <a class="btn btn-light btn-square me-3" href="">
                                         <i class="far fa-heart text-primary"></i>
                                     </a>
-                                    <a class="btn btn-primary" href="{{ path('app_reservation_new', {'serviceId': service.id}) }}">Reserver</a>
+                                    {% if not is_granted('ROLE_PRESTATAIRE') %}
+                                        <a class="btn btn-primary" href="{{ path('app_reservation_new', {'serviceId': service.id}) }}">Reserver</a>
+                                    {% endif %}
                                 </div>
                                 <small class="text-truncate">
                                     <i class="far fa-calendar-alt text-primary me-2"></i>{{ service.categorie }}
                                 </small>
                             </div>
+                            
                         </div>
                     </div>
                     {% endfor %}
