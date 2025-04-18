@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement - {{ reservation.service.titre }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Paiement</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ reservation.service.titre }}</h5>
+            <p class="card-text">
+                Montant : {{ reservation.service.prix }} F<br>
+                Date : {{ reservation.date|date('d/m/Y H:i') }}
+            </p>
+
+            <div class="mt-4">
+                <h4>Choisissez un mode de paiement </h4>
+                <div class="list-group">
+                    <a href="{{ path('app_reservation_payer', {'id': reservation.id}) }}" 
+                       class="list-group-item list-group-item-action">
+                       💳 FLOOZ
+                    </a>
+                    <a href="{{ path('app_reservation_payer', {'id': reservation.id}) }}" 
+                       class="list-group-item list-group-item-action">
+                       📱 Mix-by-yas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

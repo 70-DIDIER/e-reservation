@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le statut de la réservation{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Modifier le statut de la réservation</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Service : {{ reservation.service.titre }}</h5>
+            <p class="card-text">
+                Client : {{ reservation.client.nom }}<br>
+                Date : {{ reservation.date|date('d/m/Y H:i') }}<br>
+                Statut actuel : <span class="badge bg-{{ reservation.statut == 'confirmée' ? 'success' : (reservation.statut == 'annulée' ? 'danger' : 'warning') }}">
+                    {{ reservation.statut|capitalize }}
+                </span>
+            </p>
+            
+            {{ form_start(form) }}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.statut) }}
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle me-2"></i>Mettre à jour
+                </button>
+                
+                <a href="{{ path('app_reservation_index') }}" class="btn btn-outline-secondary ms-2">
+                    <i class="bi bi-arrow-left me-2"></i>Retour à la liste
+                </a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

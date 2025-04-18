@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Create service{% endblock %} 
+
+{% block body %} 
+    <h1>Création de service</h1> 
+    
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+          {{ form_start(form) }}
+          <div class="card-body">
+            <div class="form-group">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr':{'class':'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+            </div><br><br>
+            <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr':{'class':'form-control'}}) }}
+            {{ form_errors(form.description) }}
+            </div>
+
+            <div class="form-group">
+            {{ form_label(form.prix) }}
+            {{ form_widget(form.prix, {'attr':{'class':'form-control'}}) }}
+            {{ form_errors(form.prix) }}
+            </div>
+            <div class="form-group">
+            {{ form_label(form.categorie) }}
+            {{ form_widget(form.categorie, {'attr':{'class':'form-control-control'}}) }}
+            {{ form_errors(form.categorie) }}
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+          </div>
+          {{ form_end(form) }}
+        </div>
+    </div>
+</div>   
+{% endblock %}

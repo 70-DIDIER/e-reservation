@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Les services disponibles</h1>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    {% for service in services %}
+                    <div class="job-item p-4 mb-4">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
+                                <div class="text-start ps-4">
+                                    <h5 class="mb-3">{{ service.titre }}</h5>
+                                    <span class="text-truncate me-3">
+                                        <i class="fa fa-map-marker-alt text-primary me-2"></i>{{ service.prestataire.nom }}
+                                    </span>
+                                    <span class="text-truncate me-3">
+                                        <i class="far fa-clock text-primary me-2"></i>Disponible
+                                    </span>
+                                    <span class="text-truncate me-0">
+                                        <i class="far fa-money-bill-alt text-primary me-2"></i>{{ service.prix }}F CFA
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                <div class="d-flex mb-3">
+                                    <a class="btn btn-light btn-square me-3" href="">
+                                        <i class="far fa-heart text-primary"></i>
+                                    </a>
+                                    <a class="btn btn-primary" href="{{ path('app_reservation_new', {'serviceId': service.id}) }}">Reserver</a>
+                                </div>
+                                <small class="text-truncate">
+                                    <i class="far fa-calendar-alt text-primary me-2"></i>{{ service.categorie }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenu sur e-service{% endblock %}
+
+{% block body %}
+<!-- Carousel Start -->
+<div class="container-fluid p-0">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="img/carousel-1.jpg" alt="Service 1">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43,57,64,0.5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Trouvez le service idéal pour vos besoins</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Profitez de services de qualité proposés par des prestataires de confiance, toujours à l’écoute et réactifs.</p>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Rechercher un service</a>
+                            <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Découvrir un prestataire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="img/carousel-2.jpg" alt="Service 2">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43,57,64,0.5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Profitez d'une offre de services variée et adaptée</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Faites le choix de l'excellence et de la proximité pour concrétiser vos projets au quotidien.</p>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Rechercher un service</a>
+                            <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Découvrir un prestataire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+        
+
+
+        <!-- Category Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explorer les categories de service</h1>
+                <div class="row g-4">
+                {% for service in services %}
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                            <h6 class="mb-3">{{service.categorie}}</h6>
+                            <p class="mb-0">{{ service.prestataire.prenom }}</p>
+                        </a>
+                    </div>
+                    
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Category End -->
+
+
+        
+
+        <!-- les services disponibles -->
+       <div class="container-xxl py-5">
+    <div class="container">
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Les services disponibles</h1>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    {% for service in services %}
+                    <div class="job-item p-4 mb-4">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;">
+                                <div class="text-start ps-4">
+                                    <h5 class="mb-3">{{ service.titre }}</h5>
+                                    <span class="text-truncate me-3">
+                                        <i class="fa fa-map-marker-alt text-primary me-2"></i>{{ service.prestataire.nom }}
+                                    </span>
+                                    <span class="text-truncate me-3">
+                                        <i class="far fa-clock text-primary me-2"></i>Disponible
+                                    </span>
+                                    <span class="text-truncate me-0">
+                                        <i class="far fa-money-bill-alt text-primary me-2"></i>{{ service.prix }}F CFA
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                <div class="d-flex mb-3">
+                                    <a class="btn btn-light btn-square me-3" href="">
+                                        <i class="far fa-heart text-primary"></i>
+                                    </a>
+                                    <a class="btn btn-primary" href="{{ path('app_reservation_new', {'serviceId': service.id}) }}">Reserver</a>
+                                </div>
+                                <small class="text-truncate">
+                                    <i class="far fa-calendar-alt text-primary me-2"></i>{{ service.categorie }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+
+        <!-- les prestataires -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <h1 class="text-center mb-5">Les prestataire de confiance</h1>
+                <div class="owl-carousel testimonial-carousel">
+                {% for service in services %}
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Un prestataire de service de confiance, toujours à l'écoute, réactif et engagé pour offrir des solutions de qualité adaptées à vos besoins.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">{{ service.prestataire.prenom }}</h5>
+                                <small>{{ service.categorie }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
